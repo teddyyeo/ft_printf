@@ -6,29 +6,29 @@
 /*   By: tayeo <tayeo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 16:04:12 by tayeo             #+#    #+#             */
-/*   Updated: 2022/07/06 18:44:50 by tayeo            ###   ########.fr       */
+/*   Updated: 2022/07/08 16:07:40 by tayeo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+static int	nibble(unsigned long num, int index)
+{
+	return ((num >> (4 * index)) & 0xF);
+}
+
 static int	put_hex(unsigned long num, int type_size, char c)
 {
-	int	temp;
 	int	i;
-	int	ret_value;
+	int	ret;
 
-	temp = (num >> (4 * (2 * type_size - 1))) & 0xF;
-	i = 2 * type_size - 2;
-	ret_value = 0;
-	while (temp == 0)
-		temp = (num >> (4 * i--)) & 0xF;
-	while (i >= -1)
-	{
-		ft_putchar_fd("0123456789ABCDEF"[temp] | (c - 'X'), 1);
-		ret_value++;
-		temp = (num >> (4 * i--)) & 0xF;
-	}
+	i = 2 * type_size - 1;
+	ret = 0;
+	while (nibble(num, i) == 0)
+		i--;
+	while (i >= 0)
+		ret += ft_putchar("0123456789ABCDEF"[nibble(num, i--)] | (c - 'X'));
+	return (ret);
 }
 
 int	put_hex_int(int num, char c)
@@ -41,10 +41,7 @@ int	put_hex_addr(void *addr)
 	unsigned long	num_addr;
 
 	if (addr == NULL)
-	{
-		ft_printf("(null)");
-		return (ft_strlen("(null)"));
-	}
+		return (write(1, "(null)", 6));
 	else
 	{
 		ft_printf("0x");

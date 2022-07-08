@@ -1,41 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_uint.c                                         :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayeo <tayeo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 15:33:37 by tayeo             #+#    #+#             */
-/*   Updated: 2022/07/08 15:44:59 by tayeo            ###   ########.fr       */
+/*   Created: 2022/07/08 15:11:58 by tayeo             #+#    #+#             */
+/*   Updated: 2022/07/08 15:43:26 by tayeo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int			numlen(unsigned int nb);
-static unsigned int	power(unsigned int n);
+static int	numlen(int nb);
+static int	power(int n);
 
-int	put_uint(unsigned int num)
+int	ft_putnbr(int nb)
 {
-	int			index;
-	char		numchar;
+	int		index;
+	char	numchar;
+	int		ret;
 
+	index = numlen(nb);
 	numchar = 0;
-	index = numlen(num);
-	while (index >= 0)
+	ret = 0;
+	if (nb == -2147483648)
+		return (write(1, "-2147483648", 11));
+	else
 	{
-		numchar = ((num / power(index)) % 10) + '0';
-		write(1, &numchar, 1);
-		index--;
+		while (index >= 0)
+		{
+			if (nb < 0)
+			{
+				nb = -nb;
+				ret += ft_putchar('-');
+			}
+			ret += ft_putchar(((nb / power(index--)) % 10) + '0');
+		}
 	}
-	return (numlen(num) + 1);
+	return (ret);
 }
 
-static int	numlen(unsigned int nb)
+static int	numlen(int nb)
 {
 	int	len;
 
 	len = 0;
+	if (nb < 0)
+		nb = -nb;
 	while ((nb / 10) > 0)
 	{
 		nb /= 10;
@@ -44,10 +56,10 @@ static int	numlen(unsigned int nb)
 	return (len);
 }
 
-static unsigned int	power(unsigned int n)
+static int	power(int n)
 {
-	unsigned int	power;
-	unsigned int	index;
+	int	power;
+	int	index;
 
 	power = 1;
 	index = 0;
