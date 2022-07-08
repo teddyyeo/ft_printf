@@ -6,7 +6,7 @@
 #    By: tayeo <tayeo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/28 14:57:30 by tayeo             #+#    #+#              #
-#    Updated: 2022/07/08 16:24:01 by tayeo            ###   ########.fr        #
+#    Updated: 2022/07/08 19:59:26 by tayeo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,6 @@ fclean: clean
 re: fclean all
 
 test: src_test.c
-	gcc $? $(NAME) -o tester && ./tester
+	gcc $(FLAG) $? $(NAME) -o tester && ./tester
 
 .PHONY: all bonus clean fclean re test

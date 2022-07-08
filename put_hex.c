@@ -6,7 +6,7 @@
 /*   By: tayeo <tayeo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 16:04:12 by tayeo             #+#    #+#             */
-/*   Updated: 2022/07/08 16:07:40 by tayeo            ###   ########.fr       */
+/*   Updated: 2022/07/08 16:55:19 by tayeo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	put_hex(unsigned long num, int type_size, char c)
 
 	i = 2 * type_size - 1;
 	ret = 0;
-	while (nibble(num, i) == 0)
+	while (nibble(num, i) == 0 && i > 0)
 		i--;
 	while (i >= 0)
 		ret += ft_putchar("0123456789ABCDEF"[nibble(num, i--)] | (c - 'X'));
@@ -40,12 +40,7 @@ int	put_hex_addr(void *addr)
 {
 	unsigned long	num_addr;
 
-	if (addr == NULL)
-		return (write(1, "(null)", 6));
-	else
-	{
-		ft_printf("0x");
-		num_addr = (unsigned long)addr;
-		return (put_hex(num_addr, sizeof(unsigned long), 'x') + 2);
-	}
+	num_addr = (unsigned long)addr;
+	ft_printf("0x");
+	return (put_hex(num_addr, sizeof(unsigned long), 'x') + 2);
 }

@@ -6,7 +6,7 @@
 /*   By: tayeo <tayeo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:11:58 by tayeo             #+#    #+#             */
-/*   Updated: 2022/07/08 15:43:26 by tayeo            ###   ########.fr       */
+/*   Updated: 2022/07/08 16:52:27 by tayeo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ static int	power(int n);
 int	ft_putnbr(int nb)
 {
 	int		index;
-	char	numchar;
 	int		ret;
 
 	index = numlen(nb);
-	numchar = 0;
 	ret = 0;
 	if (nb == -2147483648)
 		return (write(1, "-2147483648", 11));

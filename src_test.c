@@ -6,28 +6,28 @@
 /*   By: tayeo <tayeo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 19:34:54 by tayeo             #+#    #+#             */
-/*   Updated: 2022/07/08 16:15:45 by tayeo            ###   ########.fr       */
+/*   Updated: 2022/07/08 17:03:15 by tayeo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-int	main(int argc, char **argv)
+int	main(void)
 {
 	char	test_char = 'a';
 	char	*test_str = "Hello please test me!";
 	int		test_num = 2147483647; //INT MAX = 2147483647
 	unsigned int		test_num2 = 4294967295; //UINT MAX = 4294967295
-	int	test_num3 = 454353;
+	int	test_num3 = -454353;
 
 	puts("%c test");
 	printf("ret: %d ", printf("printf:    %c\n", test_char));
 	printf("ret: %d ", ft_printf("ft_printf: %c\n", test_char));
 	puts("");
 	puts("%s test");
-	printf("ret: %d ", printf("printf:    %s\n", test_str));
-	printf("ret: %d", ft_printf("ft_printf: %s\n", test_str));
+	printf("ret: %d ", printf("printf:    %s\n", NULL));
+	printf("ret: %d", ft_printf("ft_printf: %s\n", NULL));
 	puts("");
 	puts("%p test");
 	printf("ret: %d ", printf("printf:    %p\n", test_str));
@@ -54,6 +54,6 @@ int	main(int argc, char **argv)
 	printf("ret: %d", ft_printf("ft_printf: %X\n", test_num3));
 	puts("");
 	puts("%% test");
-	printf("ret: %d ", printf("printf:    %%\n", test_num3));
-	printf("ret: %d", ft_printf("ft_printf: %%\n", test_num3));
+	printf("ret: %d ", printf("printf:    %%\n"));
+	printf("ret: %d", ft_printf("ft_printf: %%\n"));
 }
